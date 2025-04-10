@@ -32,7 +32,8 @@ const Dashboard = () => {
   const totalPosts = posts.length;
   const draftPosts = 3;
   const publishedPosts = totalPosts - draftPosts;
-  const totalViews = posts.reduce((sum, post) => sum + (post.views || 0), 0);
+  // Fix: Handle undefined views property by using optional chaining and default of 0
+  const totalViews = posts.reduce((sum, post) => sum + (post.views ?? 0), 0);
 
   return (
     <AdminGuard>
@@ -156,7 +157,7 @@ const Dashboard = () => {
                         <td className="p-4">{post.title}</td>
                         <td className="p-4">{post.category}</td>
                         <td className="p-4">{post.date}</td>
-                        <td className="p-4">{post.views || 0}</td>
+                        <td className="p-4">{post.views ?? 0}</td>
                         <td className="p-4 text-right">
                           <Button variant="ghost" size="sm" asChild>
                             <Link to={`/admin/editor/${post.id}`}>
