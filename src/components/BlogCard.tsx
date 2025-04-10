@@ -16,6 +16,8 @@ interface BlogCardProps {
     slug: string;
     coverImage: string;
     tags?: string[];
+    views?: number;
+    trending?: boolean;
   };
   featured?: boolean;
 }
@@ -23,14 +25,19 @@ interface BlogCardProps {
 const BlogCard = ({ post, featured = false }: BlogCardProps) => {
   return (
     <Link to={`/posts/${post.slug}`}>
-      <Card className={`overflow-hidden h-full card-hover ${featured ? "md:flex" : ""}`}>
-        <div className={`${featured ? "md:w-2/5" : ""}`}>
+      <Card className={`overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${featured ? "md:flex" : ""}`}>
+        <div className={`relative ${featured ? "md:w-2/5" : ""}`}>
           <img 
             src={post.coverImage} 
             alt={post.title} 
-            className="h-56 w-full object-cover"
+            className="h-56 w-full object-cover transition-transform duration-500 hover:scale-105"
             loading="lazy"
           />
+          {post.trending && (
+            <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">
+              Trending
+            </Badge>
+          )}
         </div>
         <div className={`${featured ? "md:w-3/5" : ""} flex flex-col`}>
           <CardHeader>
@@ -43,7 +50,7 @@ const BlogCard = ({ post, featured = false }: BlogCardProps) => {
                 {post.readTime}
               </span>
             </div>
-            <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+            <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">{post.title}</CardTitle>
             <CardDescription className="flex items-center text-xs gap-4">
               <span className="flex items-center">
                 <CalendarIcon className="mr-1 h-3 w-3" />
@@ -53,6 +60,12 @@ const BlogCard = ({ post, featured = false }: BlogCardProps) => {
                 <MessageSquare className="mr-1 h-3 w-3" />
                 {post.commentCount}
               </span>
+              {post.views !== undefined && (
+                <span className="flex items-center">
+                  <span className="i-lucide-eye mr-1 h-3 w-3"></span>
+                  {post.views} views
+                </span>
+              )}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex-grow">
@@ -60,7 +73,7 @@ const BlogCard = ({ post, featured = false }: BlogCardProps) => {
               {post.excerpt}
             </p>
             {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1 mt-2">
+              <div className="flex flex-wrap gap-1 mt-3">
                 {post.tags.slice(0, 3).map((tag) => (
                   <span key={tag} className="text-xs text-primary-foreground bg-primary/10 px-2 py-0.5 rounded-full">
                     #{tag}
@@ -73,7 +86,7 @@ const BlogCard = ({ post, featured = false }: BlogCardProps) => {
             )}
           </CardContent>
           <CardFooter>
-            <p className="text-sm font-medium text-primary flex items-center">
+            <p className="text-sm font-medium text-primary flex items-center transition-all group-hover:translate-x-1">
               Read more <ArrowRight className="ml-1 h-3 w-3" />
             </p>
           </CardFooter>

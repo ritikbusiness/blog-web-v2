@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "./ui/button";
 import {
@@ -11,13 +11,16 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Input } from "./ui/input";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, Shuffle } from "lucide-react";
 import { categories } from "@/data/mockData";
+import GlobalSearch from "./GlobalSearch";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -25,12 +28,14 @@ const Navbar = () => {
     { name: "Contact", path: "/contact" },
   ];
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/posts?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery("");
-    }
+  const getRandomPost = () => {
+    // Navigate to a random blog post
+    navigate("/posts?random=true");
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
@@ -45,7 +50,9 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-md font-medium transition-colors hover:text-primary"
+                className={`text-md font-medium transition-colors hover:text-primary ${
+                  location.pathname === item.path ? "text-primary" : ""
+                }`}
               >
                 {item.name}
               </Link>
@@ -82,26 +89,44 @@ const Navbar = () => {
         </div>
         
         <div className="flex items-center gap-4">
-          <form onSubmit={handleSearch} className="hidden md:flex relative">
-            <Input
-              type="search"
-              placeholder="Search posts..."
-              className="w-[200px] lg:w-[300px]"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button 
-              type="submit" 
-              variant="ghost" 
-              size="icon" 
-              className="absolute right-0 top-0"
-            >
-              <Search className="h-4 w-4" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </form>
+          <div className="hidden md:flex">
+            <GlobalSearch />
+          </div>
+          
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-9 w-9 rounded-full"
+            onClick={getRandomPost}
+            title="Discover Random Post"
+          >
+            <Shuffle className="h-4 w-4" />
+            <span className="sr-only">Random Post</span>
+          </Button>
           
           <ThemeToggle />
+          
+          {isAuthenticated ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hidden md:inline-flex"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          ) : null}
+          
+          {user?.isAdmin && (
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="hidden md:inline-flex"
+            >
+              <Link to="/admin/dashboard">Admin</Link>
+            </Button>
+          )}
           
           <Button
             className="md:hidden"
@@ -116,18 +141,9 @@ const Navbar = () => {
       
       {isMenuOpen && (
         <div className="container md:hidden py-4 animate-fade-in">
-          <form onSubmit={handleSearch} className="mb-4 flex">
-            <Input
-              type="search"
-              placeholder="Search posts..."
-              className="w-full"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button type="submit" variant="ghost" size="icon">
-              <Search className="h-4 w-4" />
-            </Button>
-          </form>
+          <div className="mb-4">
+            <GlobalSearch />
+          </div>
           
           <nav className="flex flex-col gap-4">
             {navItems.map((item) => (
@@ -156,6 +172,29 @@ const Navbar = () => {
                 ))}
               </div>
             </div>
+            
+            {user?.isAdmin && (
+              <Link 
+                to="/admin/dashboard"
+                className="mt-2 flex items-center text-sm font-medium hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin Dashboard
+              </Link>
+            )}
+            
+            {isAuthenticated && (
+              <Button 
+                variant="ghost"
+                className="justify-start p-0 mt-2"
+                onClick={() => {
+                  logout();
+                  setIsMenuOpen(false);
+                }}
+              >
+                Logout
+              </Button>
+            )}
           </nav>
         </div>
       )}

@@ -6,5 +6,9 @@ Allow: /
 # Disallow admin pages
 Disallow: /admin/
 
+# Disallow draft posts if they exist
+Disallow: /drafts/
+
 # Sitemap location
 Sitemap: https://yourblog.com/sitemap.xml
+
