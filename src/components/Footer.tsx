@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, GitHub, Rss, Youtube } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Github, Rss, Youtube } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { toast } from "sonner";
@@ -19,7 +18,7 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <GitHub className="h-5 w-5" />, href: "https://github.com/", label: "GitHub" },
+    { icon: <Github className="h-5 w-5" />, href: "https://github.com/", label: "GitHub" },
     { icon: <Twitter className="h-5 w-5" />, href: "https://twitter.com/", label: "Twitter" },
     { icon: <Linkedin className="h-5 w-5" />, href: "https://linkedin.com/", label: "LinkedIn" },
     { icon: <Youtube className="h-5 w-5" />, href: "https://youtube.com/", label: "YouTube" },
