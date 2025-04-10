@@ -149,15 +149,16 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
         </Button>
         <div className="h-4 w-px bg-border mx-2" />
         <label htmlFor="image-upload">
-          <Button 
-            type="button" 
-            variant="ghost" 
-            size="sm" 
-            className="cursor-pointer"
-            as="span"
-          >
-            <ImageIcon className="h-4 w-4" />
-          </Button>
+          <div className="cursor-pointer">
+            <Button 
+              type="button" 
+              variant="ghost" 
+              size="sm" 
+              className="cursor-pointer"
+            >
+              <ImageIcon className="h-4 w-4" />
+            </Button>
+          </div>
           <input
             id="image-upload"
             type="file"
