@@ -20,6 +20,7 @@ export interface Post {
   tags: string[];
   slug: string;
   commentCount: number;
+  views?: number; // Added views as an optional property
 }
 
 export interface Category {
@@ -115,7 +116,8 @@ export const posts: Post[] = [
     featured: true,
     tags: ["AI", "Software Development", "Innovation"],
     slug: "future-of-ai-in-software-development",
-    commentCount: 5
+    commentCount: 5,
+    views: 120 // Added sample view count
   },
   {
     id: "2",

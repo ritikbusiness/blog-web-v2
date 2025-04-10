@@ -32,7 +32,7 @@ const Dashboard = () => {
   const totalPosts = posts.length;
   const draftPosts = 3;
   const publishedPosts = totalPosts - draftPosts;
-  // Fix: Handle undefined views property by using optional chaining and default of 0
+  // Calculate total views safely with optional chaining and nullish coalescing
   const totalViews = posts.reduce((sum, post) => sum + (post.views ?? 0), 0);
 
   return (
