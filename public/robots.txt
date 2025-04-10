@@ -1,6 +1,10 @@
 
+# Allow all web crawlers
 User-agent: *
 Allow: /
 
-Sitemap: https://yourblog.com/sitemap.xml
+# Disallow admin pages
+Disallow: /admin/
 
+# Sitemap location
+Sitemap: https://yourblog.com/sitemap.xml

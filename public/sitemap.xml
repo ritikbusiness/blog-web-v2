@@ -32,25 +32,49 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourblog.com/categories/technology</loc>
+    <loc>https://yourblog.com/categories/tech-trends</loc>
     <lastmod>2025-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourblog.com/categories/life-lessons</loc>
+    <loc>https://yourblog.com/categories/cloud-devops</loc>
     <lastmod>2025-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourblog.com/categories/love-emotions</loc>
+    <loc>https://yourblog.com/categories/computer-engineering</loc>
+    <lastmod>2025-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yourblog.com/categories/motivation</loc>
+    <lastmod>2025-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yourblog.com/categories/poetry</loc>
+    <lastmod>2025-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yourblog.com/categories/love-relationships</loc>
     <lastmod>2025-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yourblog.com/categories/career</loc>
+    <lastmod>2025-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yourblog.com/categories/coding</loc>
     <lastmod>2025-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

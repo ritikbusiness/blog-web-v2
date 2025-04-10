@@ -10,6 +10,7 @@ interface CategoryCardProps {
     slug: string;
     icon: React.ReactNode;
     count: number;
+    keywords?: string;
   };
 }
 
@@ -19,7 +20,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       <Card className="h-full card-hover">
         <CardHeader>
           <div className="flex justify-between items-center">
-            <span className="text-primary">{category.icon}</span>
+            <span className="text-primary text-2xl">{category.icon}</span>
             <span className="text-sm font-medium bg-secondary text-secondary-foreground rounded-full px-2">
               {category.count} posts
             </span>
@@ -28,7 +29,14 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
           <CardDescription>{category.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-primary">Explore category →</p>
+          <div className="flex flex-col space-y-2">
+            <p className="text-sm text-primary">Explore category →</p>
+            {category.keywords && (
+              <p className="text-xs text-muted-foreground italic">
+                Keywords: {category.keywords}
+              </p>
+            )}
+          </div>
         </CardContent>
       </Card>
     </Link>
