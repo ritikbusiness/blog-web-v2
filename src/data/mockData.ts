@@ -20,7 +20,7 @@ export interface Category {
   name: string;
   slug: string;
   description: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
   count: number;
 }
 
