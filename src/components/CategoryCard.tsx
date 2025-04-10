@@ -1,13 +1,14 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Link } from "react-router-dom";
+import React from "react";
 
 interface CategoryCardProps {
   category: {
     name: string;
     description: string;
     slug: string;
-    icon: JSX.Element;
+    icon: React.ReactNode;
     count: number;
   };
 }
