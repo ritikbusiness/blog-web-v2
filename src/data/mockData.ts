@@ -1,5 +1,6 @@
 
 import { Laptop, Heart, Lightbulb, Briefcase } from "lucide-react";
+import React from "react";
 
 export interface Post {
   id: string;
@@ -29,28 +30,28 @@ export const categories: Category[] = [
     name: "Technology",
     slug: "technology",
     description: "Exploring the latest tech trends and innovations",
-    icon: <Laptop className="h-6 w-6" />,
+    icon: React.createElement(Laptop, { className: "h-6 w-6" }),
     count: 8,
   },
   {
     name: "Life Lessons",
     slug: "life-lessons",
     description: "Insights and wisdom from everyday experiences",
-    icon: <Lightbulb className="h-6 w-6" />,
+    icon: React.createElement(Lightbulb, { className: "h-6 w-6" }),
     count: 12,
   },
   {
     name: "Love & Emotions",
     slug: "love-emotions",
     description: "Exploring the depths of human feelings and relationships",
-    icon: <Heart className="h-6 w-6" />,
+    icon: React.createElement(Heart, { className: "h-6 w-6" }),
     count: 7,
   },
   {
     name: "Career",
     slug: "career",
     description: "Professional growth and workplace insights",
-    icon: <Briefcase className="h-6 w-6" />,
+    icon: React.createElement(Briefcase, { className: "h-6 w-6" }),
     count: 9,
   },
 ];
