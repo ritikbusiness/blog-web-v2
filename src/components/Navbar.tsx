@@ -12,15 +12,18 @@ import {
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
 import { Input } from "./ui/input";
-import { Menu, X, Search, Shuffle } from "lucide-react";
+import { Menu, X, Search, Shuffle, BookOpen, Sparkles, TrendingUp } from "lucide-react";
 import { categories } from "@/data/mockData";
 import GlobalSearch from "./GlobalSearch";
 import { useAuth } from "@/contexts/AuthContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const Navbar = () => {
+interface NavbarProps {
+  isScrolled?: boolean;
+}
+
+const Navbar = ({ isScrolled = false }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated, logout } = useAuth();
@@ -31,16 +34,6 @@ const Navbar = () => {
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      setIsScrolled(offset > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const getRandomPost = () => {
     // Navigate to a random blog post
@@ -54,26 +47,29 @@ const Navbar = () => {
 
   return (
     <header 
-      className={`sticky top-0 z-40 w-full border-b transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm" 
+      className={`fixed top-0 left-0 right-0 z-40 w-full border-b transition-all duration-300 ${
+        isScrolled ? "bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60 shadow-sm" 
         : "bg-background"
       }`}
     >
       <div className="container flex h-16 items-center justify-between">
         {/* Logo and Nav Links */}
         <div className="flex items-center gap-6 md:gap-8">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 group">
+            <span className="text-primary">
+              <BookOpen className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+            </span>
             <span className="font-serif text-2xl font-bold">Thoughtscape</span>
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
+          <nav className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-md font-medium px-3 py-2 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground ${
-                  location.pathname === item.path ? "text-primary bg-secondary/50" : ""
+                className={`text-sm font-medium px-3 py-2 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 after:origin-bottom-right after:transition-transform hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                  location.pathname === item.path ? "text-primary after:scale-x-100" : ""
                 }`}
               >
                 {item.name}
@@ -84,9 +80,9 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="px-3 py-2">Categories</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="px-3 py-2 text-sm">Categories</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    <div className="grid w-[400px] gap-1 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {categories.map((category) => (
                         <Link
                           key={category.slug}
@@ -99,7 +95,7 @@ const Navbar = () => {
                               {category.name}
                             </div>
                           </div>
-                          <p className="line-clamp-2 text-xs text-muted-foreground">
+                          <p className="line-clamp-2 text-xs text-muted-foreground mt-1">
                             {category.description}
                           </p>
                         </Link>
@@ -113,7 +109,7 @@ const Navbar = () => {
         </div>
         
         {/* Right Side Items */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="hidden md:flex">
             <GlobalSearch />
           </div>
@@ -121,7 +117,7 @@ const Navbar = () => {
           <Button
             variant="outline"
             size="icon"
-            className="h-9 w-9 rounded-full transition-transform duration-300 hover:scale-105"
+            className="h-9 w-9 rounded-full transition-all duration-300 hover:scale-105 hover:bg-accent hover:text-accent-foreground"
             onClick={getRandomPost}
             title="Discover Random Post"
           >
@@ -168,12 +164,15 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 z-50 transform bg-background md:hidden transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 z-50 transform bg-background/95 backdrop-blur-lg md:hidden transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex h-16 items-center justify-between px-6 border-b">
           <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+            <span className="text-primary">
+              <BookOpen className="h-5 w-5" />
+            </span>
             <span className="font-serif text-xl font-bold">Thoughtscape</span>
           </Link>
           <Button

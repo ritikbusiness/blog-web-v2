@@ -105,6 +105,26 @@ export default {
         DEFAULT: {
           css: {
             maxWidth: '100%',
+            color: 'hsl(var(--foreground))',
+            'h1,h2,h3,h4,h5,h6': {
+              color: 'hsl(var(--foreground))',
+              fontFamily: "'Playfair Display', serif",
+            },
+            blockquote: {
+              borderLeftColor: 'hsl(var(--primary))',
+              backgroundColor: 'hsl(var(--secondary) / 0.3)',
+              padding: '1rem',
+              borderRadius: '0.375rem',
+            },
+            a: {
+              color: 'hsl(var(--primary))',
+              '&:hover': {
+                color: 'hsl(var(--primary) / 0.7)',
+              },
+            },
+            img: {
+              borderRadius: 'var(--radius)',
+            },
           },
         },
       },

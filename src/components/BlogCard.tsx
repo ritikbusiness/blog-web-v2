@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Link } from "react-router-dom";
-import { CalendarIcon, Clock, MessageSquare, Tag, ArrowRight } from "lucide-react";
+import { CalendarIcon, Clock, MessageSquare, Tag, ArrowRight, Eye } from "lucide-react";
 
 interface BlogCardProps {
   post: {
@@ -24,20 +24,29 @@ interface BlogCardProps {
 
 const BlogCard = ({ post, featured = false }: BlogCardProps) => {
   return (
-    <Link to={`/posts/${post.slug}`}>
-      <Card className={`overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${featured ? "md:flex" : ""}`}>
+    <Link to={`/posts/${post.slug}`} className="group">
+      <Card className={`overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border/40 ${featured ? "md:flex" : ""}`}>
         <div className={`relative ${featured ? "md:w-2/5" : ""}`}>
-          <img 
-            src={post.coverImage} 
-            alt={post.title} 
-            className="h-56 w-full object-cover transition-transform duration-500 hover:scale-105"
-            loading="lazy"
-          />
+          <div className="overflow-hidden">
+            <img 
+              src={post.coverImage} 
+              alt={post.title} 
+              className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
           {post.trending && (
             <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">
               Trending
             </Badge>
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center">
+            <div className="p-4 text-white text-center w-full">
+              <span className="flex items-center justify-center gap-1 text-sm font-medium">
+                Read more <ArrowRight className="h-3 w-3" />
+              </span>
+            </div>
+          </div>
         </div>
         <div className={`${featured ? "md:w-3/5" : ""} flex flex-col`}>
           <CardHeader>
@@ -62,7 +71,7 @@ const BlogCard = ({ post, featured = false }: BlogCardProps) => {
               </span>
               {post.views !== undefined && (
                 <span className="flex items-center">
-                  <span className="i-lucide-eye mr-1 h-3 w-3"></span>
+                  <Eye className="mr-1 h-3 w-3" />
                   {post.views} views
                 </span>
               )}

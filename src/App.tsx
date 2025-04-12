@@ -31,7 +31,7 @@ const App = () => (
       <TooltipProvider>
         <AuthProvider>
           <Toaster />
-          <Sonner />
+          <Sonner closeButton position="top-right" />
           <BrowserRouter>
             <Routes>
               {/* Public Routes */}

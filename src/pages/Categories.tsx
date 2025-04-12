@@ -8,6 +8,7 @@ import BlogCard from "@/components/BlogCard";
 import NewsletterSection from "@/components/NewsletterSection";
 import { categories, getCategoryBySlug, getPostsByCategory } from "@/data/mockData";
 import { Category, Post } from "@/data/mockData";
+import { ArrowLeft } from "lucide-react";
 
 const Categories = () => {
   const { categorySlug } = useParams<{ categorySlug?: string }>();
@@ -34,18 +35,31 @@ const Categories = () => {
   };
 
   return (
-    <div className="min-h-screen animate-fade-in">
+    <div className="min-h-screen">
       {/* Header Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-secondary via-background to-background">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-accent/30 via-background to-background">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
+            {activeCategory && (
+              <Button variant="ghost" onClick={() => navigate('/categories')} className="mb-4 -ml-2 group">
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                All Categories
+              </Button>
+            )}
+            
+            <div className="inline-flex items-center justify-center mb-2">
+              {activeCategory && (
+                <span className="text-4xl text-primary mr-2">{activeCategory.icon}</span>
+              )}
+            </div>
+            
             <h1 className="mb-6 font-serif">
-              {activeCategory ? activeCategory.name : "Categories"}
+              {activeCategory ? activeCategory.name : "Explore Categories"}
             </h1>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="mb-8 text-lg text-muted-foreground max-w-xl mx-auto text-balance">
               {activeCategory 
                 ? activeCategory.description 
-                : "Explore posts across different topics and interests"}
+                : "Discover articles across different topics and interests"}
             </p>
           </div>
         </div>
@@ -63,16 +77,17 @@ const Categories = () => {
           ) : (
             <div>
               <Tabs defaultValue={activeCategory.slug} onValueChange={handleCategoryChange} className="w-full">
-                <TabsList className="w-full justify-start overflow-x-auto mb-8">
-                  {categories.map((category) => (
-                    <TabsTrigger key={category.slug} value={category.slug} className="px-6">
-                      <div className="flex items-center space-x-2">
+                <div className="mb-8 overflow-x-auto scrollbar-hide">
+                  <TabsList className="h-auto p-1 inline-flex w-auto min-w-full">
+                    {categories.map((category) => (
+                      <TabsTrigger key={category.slug} value={category.slug} className="flex items-center gap-2 py-2 px-4">
                         <span>{category.icon}</span>
                         <span>{category.name}</span>
-                      </div>
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </div>
+                
                 {categories.map((category) => (
                   <TabsContent key={category.slug} value={category.slug}>
                     {category.slug === activeCategory.slug && (
@@ -84,9 +99,9 @@ const Categories = () => {
                             ))}
                           </div>
                         ) : (
-                          <div className="text-center py-12">
+                          <div className="text-center py-16 bg-secondary/20 rounded-lg">
                             <h3 className="text-xl mb-4">No posts found in this category</h3>
-                            <p className="text-muted-foreground mb-6">
+                            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
                               Check back soon for new content or explore other categories
                             </p>
                             <Button onClick={() => navigate("/categories")}>
