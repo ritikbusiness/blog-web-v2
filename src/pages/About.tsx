@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
 import NewsletterSection from "@/components/NewsletterSection";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import AuthorBio from "@/components/AuthorBio";
 
 const About = () => {
   useEffect(() => {
@@ -20,11 +21,11 @@ const About = () => {
     { icon: <Mail className="h-5 w-5" />, href: "#", label: "Email" },
   ];
 
-  // Schema data for Ritik Shah
+  // Schema data for Ritik Shah - safe string values without window object that would cause client-side errors
   const personSchemaData = {
     name: "Ritik Shah",
-    url: window.location.origin + "/about",
-    image: window.location.origin + "/author-ritik-shah.png",
+    url: "/about",
+    image: "/author-ritik-shah.png",
     jobTitle: "Computer Engineer | DevOps & Cloud Enthusiast | Motivational Writer & Poet",
     description: "Passionate about technology, personal development, and creative writing. I combine my technical expertise with a love for storytelling.",
     socialLinks: ["https://twitter.com/ritikshah", "https://linkedin.com/in/ritikshah", "https://github.com/ritikshah"]

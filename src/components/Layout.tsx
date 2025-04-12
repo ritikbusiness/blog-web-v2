@@ -18,8 +18,10 @@ const Layout = ({ children }: LayoutProps) => {
       const scrollHeight = document.body.scrollHeight - window.innerHeight;
       
       // Update scroll progress for the progress bar
-      if (scrollHeight) {
+      if (scrollHeight > 0) {
         setProgress(Number((currentProgress / scrollHeight).toFixed(2)) * 100);
+      } else {
+        setProgress(0);
       }
       
       // Check if page is scrolled for navbar styling
@@ -27,6 +29,9 @@ const Layout = ({ children }: LayoutProps) => {
     };
     
     window.addEventListener('scroll', updateReadingProgress);
+    
+    // Initial call to set progress on mount
+    updateReadingProgress();
     
     return () => {
       window.removeEventListener('scroll', updateReadingProgress);
