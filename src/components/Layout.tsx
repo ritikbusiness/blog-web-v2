@@ -39,7 +39,6 @@ const Layout = ({ children }: LayoutProps) => {
       <Progress 
         value={progress} 
         className="fixed top-16 left-0 right-0 z-50 h-0.5 w-full bg-transparent" 
-        indicatorClassName="bg-primary transition-all duration-300 ease-in-out"
       />
       <main className="flex-1 pt-16">{children}</main>
       <Footer />

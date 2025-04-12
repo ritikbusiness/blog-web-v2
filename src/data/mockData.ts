@@ -325,3 +325,20 @@ export const getRelatedPosts = (currentPostId: string, limit: number = 3): Post[
     .filter((post) => post.id !== currentPostId && post.categorySlug === currentPost.categorySlug)
     .slice(0, limit);
 };
+
+export const getTrendingPosts = (limit: number = 3): Post[] => {
+  return [...posts]
+    .sort((a, b) => {
+      if (a.views !== undefined && b.views !== undefined) {
+        return b.views - a.views;
+      }
+      else if (a.views !== undefined) {
+        return -1;
+      }
+      else if (b.views !== undefined) {
+        return 1;
+      }
+      return b.commentCount - a.commentCount;
+    })
+    .slice(0, limit);
+};
