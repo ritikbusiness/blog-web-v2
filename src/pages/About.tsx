@@ -37,13 +37,13 @@ const About = () => {
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-12">
             <div className="w-full md:w-1/3">
               <img 
-                src="/placeholder.svg" 
-                alt="Author" 
+                src="/author-ritik-shah.png" 
+                alt="Ritik Shah" 
                 className="rounded-lg w-full"
               />
             </div>
             <div className="w-full md:w-2/3 space-y-4">
-              <h2 className="text-3xl font-serif">Your Name</h2>
+              <h2 className="text-3xl font-serif">Ritik Shah</h2>
               <p className="text-muted-foreground">Writer & Content Creator</p>
               
               <div className="flex space-x-3">

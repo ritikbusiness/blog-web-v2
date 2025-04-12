@@ -19,7 +19,8 @@ const AdminGuard = ({ children }: AdminGuardProps) => {
     );
   }
 
-  if (!user || !user.isAdmin) {
+  // Specifically check for Ritik Shah's admin credentials
+  if (!user || !user.isAdmin || user.email !== "ritikshah@example.com") {
     // Redirect to login if not authenticated or not admin
     return <Navigate to="/admin/login" replace />;
   }

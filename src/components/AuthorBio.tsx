@@ -18,23 +18,23 @@ const AuthorBio = ({ compact = false }: AuthorBioProps) => {
   return compact ? (
     <div className="flex items-center gap-4">
       <Avatar className="h-10 w-10">
-        <AvatarImage src="/placeholder.svg" alt="Author" />
-        <AvatarFallback>AU</AvatarFallback>
+        <AvatarImage src="/author-ritik-shah.png" alt="Ritik Shah" />
+        <AvatarFallback>RS</AvatarFallback>
       </Avatar>
       <div>
-        <p className="font-medium">Your Name</p>
+        <p className="font-medium">Ritik Shah</p>
         <p className="text-xs text-muted-foreground">Blog Author</p>
       </div>
     </div>
   ) : (
     <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-accent/50 rounded-lg">
       <Avatar className="h-24 w-24">
-        <AvatarImage src="/placeholder.svg" alt="Author" />
-        <AvatarFallback>AU</AvatarFallback>
+        <AvatarImage src="/author-ritik-shah.png" alt="Ritik Shah" />
+        <AvatarFallback>RS</AvatarFallback>
       </Avatar>
       <div className="space-y-4">
         <div>
-          <h3 className="text-xl font-medium">Your Name</h3>
+          <h3 className="text-xl font-medium">Ritik Shah</h3>
           <p className="text-sm text-muted-foreground">Blog Author</p>
         </div>
         <p>

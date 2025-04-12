@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ChevronLeft, Calendar, Clock, MessageSquare, Share2, Facebook, Twitter, Linkedin, Eye, Bookmark, Heart } from "lucide-react";
@@ -106,11 +105,11 @@ const PostDetail = () => {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center space-x-2">
                 <Avatar className="h-10 w-10 border-2 border-primary/10">
-                  <AvatarImage src="/placeholder.svg" alt="Author" />
-                  <AvatarFallback>AU</AvatarFallback>
+                  <AvatarImage src="/author-ritik-shah.png" alt="Ritik Shah" />
+                  <AvatarFallback>RS</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-medium">Your Name</p>
+                  <p className="text-sm font-medium">Ritik Shah</p>
                   <div className="flex text-xs text-muted-foreground space-x-3">
                     <span className="flex items-center">
                       <Calendar className="mr-1 h-3 w-3" />
