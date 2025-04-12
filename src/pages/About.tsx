@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
 import NewsletterSection from "@/components/NewsletterSection";
+import SchemaMarkup from "@/components/SchemaMarkup";
 
 const About = () => {
   useEffect(() => {
-    document.title = "About Me | Thoughtscape";
+    document.title = "About Ritik Shah | Thoughtscape";
   }, []);
 
   const socialLinks = [
@@ -19,14 +20,27 @@ const About = () => {
     { icon: <Mail className="h-5 w-5" />, href: "#", label: "Email" },
   ];
 
+  // Schema data for Ritik Shah
+  const personSchemaData = {
+    name: "Ritik Shah",
+    url: window.location.origin + "/about",
+    image: window.location.origin + "/author-ritik-shah.png",
+    jobTitle: "Computer Engineer | DevOps & Cloud Enthusiast | Motivational Writer & Poet",
+    description: "Passionate about technology, personal development, and creative writing. I combine my technical expertise with a love for storytelling.",
+    socialLinks: ["https://twitter.com/ritikshah", "https://linkedin.com/in/ritikshah", "https://github.com/ritikshah"]
+  };
+
   return (
     <div className="min-h-screen animate-fade-in">
+      {/* SEO Schema Markup */}
+      <SchemaMarkup type="person" data={personSchemaData} />
+
       {/* Hero Section */}
       <section className="py-12 md:py-20 bg-gradient-to-br from-accent via-background to-background">
         <div className="container max-w-3xl text-center">
           <h1 className="mb-6">About Me</h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8">
-            Learn more about the person behind the blog and my journey.
+            Learn more about my journey in technology and writing.
           </p>
         </div>
       </section>
@@ -38,13 +52,13 @@ const About = () => {
             <div className="w-full md:w-1/3">
               <img 
                 src="/author-ritik-shah.png" 
-                alt="Ritik Shah" 
-                className="rounded-lg w-full"
+                alt="Ritik Shah - Author" 
+                className="rounded-xl w-full shadow-md"
               />
             </div>
             <div className="w-full md:w-2/3 space-y-4">
               <h2 className="text-3xl font-serif">Ritik Shah</h2>
-              <p className="text-muted-foreground">Writer & Content Creator</p>
+              <p className="text-muted-foreground">Computer Engineer | DevOps & Cloud Enthusiast | Motivational Writer & Poet</p>
               
               <div className="flex space-x-3">
                 {socialLinks.map((link, i) => (
@@ -62,9 +76,9 @@ const About = () => {
               </div>
               
               <p>
-                Hello! I'm a passionate writer and storyteller who loves exploring the intersection 
-                of technology, personal development, and human emotions. Through my blog, I share insights, 
-                experiences, and lessons learned throughout my journey.
+                I'm a passionate computer engineer with expertise in DevOps and cloud technologies.
+                Beyond my technical background, I find joy in writing motivational content and poetry
+                that connects with readers on a deeper level.
               </p>
             </div>
           </div>
@@ -75,15 +89,15 @@ const About = () => {
             <div>
               <h3 className="text-2xl font-serif mb-4">My Story</h3>
               <p className="mb-4">
-                I started this blog as a way to document my thoughts and share ideas that I found valuable. 
-                What began as a personal project has grown into a community of like-minded individuals 
-                who enjoy thoughtful discussions on topics ranging from cutting-edge technology to the 
-                nuances of human relationships.
+                My journey began in the world of technology, where I developed a strong foundation in 
+                computer engineering. Over the years, I've specialized in DevOps practices and cloud 
+                infrastructure, helping organizations build scalable and efficient systems.
               </p>
               <p>
-                With a background in [your background], I bring a unique perspective to the subjects I 
-                write about. I believe in the power of storytelling to connect people, inspire change, 
-                and foster understanding across different viewpoints.
+                Alongside my technical career, I discovered a passion for writing. What started as 
+                personal reflections evolved into motivational pieces and poetry that resonated with 
+                readers. Through this blog, I aim to bridge the gap between technology and human 
+                experience, sharing insights that inspire and educate.
               </p>
             </div>
             
@@ -94,16 +108,16 @@ const About = () => {
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>
-                  <strong>Technology</strong> - Exploring innovations, digital trends, and how tech shapes our future
+                  <strong>Technology</strong> - Exploring cloud technologies, DevOps best practices, and emerging tech trends
                 </li>
                 <li>
                   <strong>Life Lessons</strong> - Sharing insights from personal experiences and observations
                 </li>
                 <li>
-                  <strong>Love & Emotions</strong> - Discussing relationships, emotional intelligence, and human connection
+                  <strong>Motivational Content</strong> - Encouraging personal and professional growth through inspiring stories
                 </li>
                 <li>
-                  <strong>Career</strong> - Professional development, workplace dynamics, and finding fulfillment in work
+                  <strong>Poetry</strong> - Creative expressions that reflect on human emotions and experiences
                 </li>
               </ul>
             </div>
@@ -111,19 +125,20 @@ const About = () => {
             <div>
               <h3 className="text-2xl font-serif mb-4">My Approach</h3>
               <p>
-                I strive to create content that is thoughtful, well-researched, and accessible. Whether I'm 
-                breaking down complex technological concepts or exploring the subtleties of human emotions, 
-                my goal is to present ideas in a way that resonates and provides value. I believe in honesty, 
-                authenticity, and maintaining an open mind – qualities that I hope shine through in my writing.
+                I believe in creating content that balances technical accuracy with accessibility.
+                Whether I'm explaining complex cloud concepts or crafting a piece of motivational poetry,
+                my goal is to connect with readers in a meaningful way. I value authenticity, continuous
+                learning, and the power of words to inspire change—qualities that I hope shine through in
+                my writing.
               </p>
             </div>
             
             <div>
               <h3 className="text-2xl font-serif mb-4">Let's Connect</h3>
               <p className="mb-6">
-                I love hearing from readers and engaging in meaningful conversations. Whether you have 
-                feedback, questions, or just want to say hello, feel free to reach out through social 
-                media or the contact page.
+                I love hearing from readers and engaging in meaningful conversations about technology,
+                writing, or anything that sparks curiosity. Whether you have feedback, questions, or just
+                want to say hello, feel free to reach out through social media or the contact page.
               </p>
               <div className="flex space-x-4">
                 <Button asChild>
