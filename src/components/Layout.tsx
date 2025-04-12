@@ -38,6 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
     };
   }, []);
   
+  // Add key to force re-render of children when route changes
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar isScrolled={isScrolled} />

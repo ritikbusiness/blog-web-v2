@@ -10,7 +10,15 @@ import AuthorBio from "@/components/AuthorBio";
 
 const About = () => {
   useEffect(() => {
+    // Set document title
     document.title = "About Ritik Shah | Thoughtscape";
+    
+    // Log component mounting for debugging
+    console.log("About component mounted");
+    
+    return () => {
+      console.log("About component unmounted");
+    };
   }, []);
 
   const socialLinks = [
@@ -21,7 +29,7 @@ const About = () => {
     { icon: <Mail className="h-5 w-5" />, href: "#", label: "Email" },
   ];
 
-  // Schema data for Ritik Shah - safe string values without window object that would cause client-side errors
+  // Schema data for Ritik Shah - safe string values without window object
   const personSchemaData = {
     name: "Ritik Shah",
     url: "/about",

@@ -8,7 +8,15 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const Contact = () => {
   useEffect(() => {
+    // Set document title
     document.title = "Contact Me | Thoughtscape";
+    
+    // Log component mounting for debugging
+    console.log("Contact component mounted");
+    
+    return () => {
+      console.log("Contact component unmounted");
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
