@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Progress } from "./ui/progress";
+import { useLocation } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,34 +12,36 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const [progress, setProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
   
   useEffect(() => {
     const updateReadingProgress = () => {
       const currentProgress = window.scrollY;
       const scrollHeight = document.body.scrollHeight - window.innerHeight;
       
-      // Update scroll progress for the progress bar
       if (scrollHeight > 0) {
         setProgress(Number((currentProgress / scrollHeight).toFixed(2)) * 100);
       } else {
         setProgress(0);
       }
       
-      // Check if page is scrolled for navbar styling
       setIsScrolled(window.scrollY > 20);
     };
     
     window.addEventListener('scroll', updateReadingProgress);
     
-    // Initial call to set progress on mount
-    updateReadingProgress();
+    // Reset progress when route changes
+    setProgress(0);
+    window.scrollTo(0, 0);
+    
+    // Initial call to set progress after mount
+    setTimeout(updateReadingProgress, 100);
     
     return () => {
       window.removeEventListener('scroll', updateReadingProgress);
     };
-  }, []);
+  }, [location.pathname]); // Add location dependency
   
-  // Add key to force re-render of children when route changes
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar isScrolled={isScrolled} />
