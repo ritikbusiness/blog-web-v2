@@ -1,5 +1,5 @@
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Progress } from "./ui/progress";
@@ -32,9 +32,11 @@ const Layout = ({ children }: LayoutProps) => {
     
     window.addEventListener('scroll', updateReadingProgress);
     
-    // Reset progress when route changes but don't scroll to top
-    // This allows the page to handle its own scrolling
+    // Reset progress when route changes
     setProgress(0);
+    
+    // Reset scroll position on route change
+    window.scrollTo(0, 0);
     
     // Initial call to set progress after mount
     setTimeout(updateReadingProgress, 100);
@@ -51,7 +53,9 @@ const Layout = ({ children }: LayoutProps) => {
         value={progress} 
         className="fixed top-16 left-0 right-0 z-50 h-0.5 w-full bg-transparent" 
       />
-      <main className="flex-1 pt-16">{children}</main>
+      <main className="flex-1 pt-16">
+        {children}
+      </main>
       <Footer />
     </div>
   );
