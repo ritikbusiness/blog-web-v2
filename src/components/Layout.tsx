@@ -15,6 +15,8 @@ const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
   
   useEffect(() => {
+    console.log("Layout mounted/updated");
+    
     const updateReadingProgress = () => {
       const currentProgress = window.scrollY;
       const scrollHeight = document.body.scrollHeight - window.innerHeight;
@@ -30,9 +32,9 @@ const Layout = ({ children }: LayoutProps) => {
     
     window.addEventListener('scroll', updateReadingProgress);
     
-    // Reset progress when route changes
+    // Reset progress when route changes but don't scroll to top
+    // This allows the page to handle its own scrolling
     setProgress(0);
-    window.scrollTo(0, 0);
     
     // Initial call to set progress after mount
     setTimeout(updateReadingProgress, 100);
@@ -40,7 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
     return () => {
       window.removeEventListener('scroll', updateReadingProgress);
     };
-  }, [location.pathname]); // Add location dependency
+  }, [location.pathname]);
   
   return (
     <div className="flex min-h-screen flex-col">
